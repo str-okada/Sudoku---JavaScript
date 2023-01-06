@@ -1,0 +1,230 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body {
+background-image: url(./img/pexels-aleksandar-pasaric-1510610.jpg);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+font-size: 24px;
+font-family: 'Technor', sans-serif;
+display: flex;
+flex-direction: row;
+column-gap: 12vh;
+}
+
+h1 {
+font-size: 62px;
+}
+
+h3 {
+font-size: 36px;
+}
+
+h1, h3 {
+text-transform: uppercase;
+letter-spacing: 1.5px;
+font-weight: 400;
+}
+
+h4{
+margin-top: 8vh;
+font-size: 18px;
+}
+
+h5{
+margin-left: 1vh;
+font-size: 18px;
+}
+
+h4, h5{
+color: rgb(247, 220, 132);
+letter-spacing: 1.5px;
+}
+
+h6{
+color: rgb(247, 220, 132);
+margin-left: 3vh;
+width: 30vh;
+font-size: 15px;
+}
+
+i{
+padding-right: 5px;
+}
+
+table {
+width: 90%;
+background-color: #010a01;
+z-index: -2;
+overflow: hidden;
+color: rgb(255, 196, 0);
+border: 0.2rem solid #fff;
+border-radius: 1vh;
+box-shadow: 0 0 .1rem #fff,
+          0 0 .1rem #fff,
+          0 0 1rem rgb(255, 196, 0),
+          0 0 0.6rem rgb(255, 196, 0),
+          0 0 1.8rem rgb(255, 196, 0),
+          inset 0 0 0.9rem rgb(255, 196, 0);
+}
+
+td {
+  border: solid 1px;
+  border-collapse: collapse;
+  padding: 8px;
+  height: 25px;
+  width: 35px;
+  text-align: center;
+  position: relative;
+  border-radius: 2px;
+}
+
+td:hover {
+background-color: rgb(255, 196, 0);
+color: #010a01;
+}
+
+.container {
+width: 32%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.neonText {
+  color: #fff;
+  text-shadow:
+      0 0 3px #fff,
+      0 0 5px #fff,
+      0 0 17px #fff,
+      0 0 38px rgb(255, 196, 0),
+      0 0 78px rgb(255, 196, 0),
+      0 0 88px rgb(255, 196, 0),
+      0 0 98px rgb(255, 196, 0),
+      0 0 147px rgb(255, 196, 0);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50vh;
+  height: 35vh;
+  background-color: #010a01;
+  border: 0.2rem solid #fff;
+  border-radius: 2vh;
+  box-shadow: 0 0 .1rem #fff,
+            0 0 .1rem #fff,
+            0 0 1rem rgb(255, 196, 0),
+            0 0 0.6rem rgb(255, 196, 0),
+            0 0 1.8rem rgb(255, 196, 0),
+            inset 0 0 0.9rem rgb(255, 196, 0);
+}
+
+.sudoku{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2px;
+  background-color: #010a01;
+  height: 100vh;
+  width: 23%;
+}
+
+.accordion {
+  font-size: 24px;
+  margin-top: 8vh;
+  font-family: 'Technor', sans-serif;
+  background-color: #010a01;
+  color: rgb(247, 220, 132);
+  cursor: pointer;
+  padding: 1px;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+.panel {
+  display: none;
+  overflow: hidden;
+}
+
+.btn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 4vh;
+  margin-top: 10vh;
+}
+
+.btn > button{
+  width: 30vh;
+  height: 8vh;
+  font-family: 'Technor', sans-serif;
+  font-size: 16px;
+  color: #fff;
+  background-color: #010a01;
+  border: 1px solid #fff;
+  box-shadow: 0 0 0.1rem #fff,
+            0 0 0.1rem #fff,
+            0 0 0.2rem rgb(255, 196, 0),
+            0 0 0.1rem rgb(255, 196, 0),
+            0 0 0.5rem rgb(255, 196, 0),
+            inset 0 0 0.2rem rgb(255, 196, 0);
+            text-shadow:
+              0 0 1px #fff,
+              0 0 3px #fff,
+              0 0 36px rgb(255, 196, 0),
+              0 0 76px rgb(255, 196, 0),
+              0 0 86px rgb(255, 196, 0),
+              0 0 96px rgb(255, 196, 0),          
+}
+
+.btn > button:hover{
+  background-color: rgb(255, 196, 0);
+  cursor: pointer;
+  color: #fff;
+  transition: .5s;
+  border: 1px solid #fff;
+  box-shadow: 0 0 0.5rem #fff,
+            0 0 0.5rem #fff,
+            0 0 0.7rem hsl(46, 100%, 50%),
+            0 0 0.5rem rgb(255, 196, 0),
+            0 0 0.9rem rgb(255, 196, 0),
+            inset 0 0 0.6rem rgb(255, 196, 0);
+}
+
+.trIn {
+  background-color: rgb(250, 128, 114, 0.5);
+  position: relative;
+}
+
+.tdIn:after {
+  content: "";
+  background-color: rgb(250, 128, 114,0.5);
+  width: 100%;
+  height: 200vh;
+  position: absolute;
+  top: -100vh;
+  left: 0;
+  z-index: -1;
+}
+
+
+
+
+
+

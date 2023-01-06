@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://api.fontshare.com/v2/css?f[]=technor@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./styleTest.css">
+    <title>Document</title>
+    
+</head>
+<body id="body"  style="opacity:0;">
+    <div class="container">
+        <div class="heading" id="heading">
+            <h1 class="neonText">
+                SUDOKU
+            </h1>
+            <h3 class="neonText">online game</h3> 
+        </div>    
+        <div class="btn" id="btn">
+            <button type="button" id="play" onClick="window.location.reload();">PLAY<i class="fa-solid fa-angle-right"></i></button>
+            <button type="button" id="validate">VALIDATE<i class="fa-solid fa-angle-right"></i></button>
+        </div>
+    </div>
+    <div class="sudoku">
+        <table>
+
+        </table>
+    </div>
+    <div class="group">
+        <button class="accordion"><i class="fa-solid fa-angle-down"></i>GROUP_JKLMT</button>
+        <div class="panel">
+            <h5><i class="fa-solid fa-angle-down"></i>JAY</h5>
+            <h6><i class="fa-solid fa-angle-right"></i>group leader // javascript - column and row validation</h6>
+            <h5><i class="fa-solid fa-angle-down"></i>KATHLEEN</h5>
+            <h6><i class="fa-solid fa-angle-right"></i>css design // javascript - animation</h6>
+            <h5><i class="fa-solid fa-angle-down"></i>LUCAS</h5>
+            <h6><i class="fa-solid fa-angle-right"></i>javascript - square validation</h6>
+            <h5><i class="fa-solid fa-angle-down"></i>MASASHI</h5>
+            <h6><i class="fa-solid fa-angle-right"></i>javascript - square validation</h6>
+            <h5><i class="fa-solid fa-angle-down"></i>TARO</h5>
+            <h6><i class="fa-solid fa-angle-right"></i>javascript - column and row validation</h6>
+        </div>
+</body>
+    <script>
+       window.onload = fadeIn;
+  
+        function fadeIn() {
+            var fade = document.getElementById("body");
+            var opacity = 0;
+            var intervalID = setInterval(function() {
+
+                if (opacity < 1) {
+                    opacity = opacity + 0.1
+                    fade.style.opacity = opacity;
+                } else {
+                    clearInterval(intervalID);
+                }
+            }, 200);
+        }
+
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+            panel.style.display = "none";
+            } else {
+            panel.style.display = "block";
+            }
+        });
+        }
+
+        let size, values;
+        let tablePop = (values) => {
+            const table = document.querySelector("table");
+            for(let rowidx in values){
+                let tr = document.createElement("tr");
+                for(let colIdx in values[rowidx]){
+                    let td = document.createElement("td");
+                    td.innerHTML = values[rowidx][colIdx];
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+        }
+        let loadJson = () =>{
+            const xmlHTTP = new XMLHttpRequest();
+            xmlHTTP.onload = function(){
+                let output = JSON.parse(this.responseText)[0];
+                console.log(output);
+                size = output.size;
+                values = output.values;
+                tablePop(values);
+            }
+            xmlHTTP.open("GET","./source.json",true);
+            xmlHTTP.send();
+        }
+        loadJson();
+
+        const h3n = document.createElement("h3");
+        body.appendChild(h3n);
+
+
+        
+        const validate = document.querySelector("#validate");
+        
+        validate.addEventListener('click',check);
+    
+
+
+        
+        // check something
+        function check() {
+            const h3 = document.querySelector("h3");
+            h3.style.display = "block";
+            const tr = document.querySelectorAll("table tr");
+
+            let checkFlag = true;
+            // calculate row
+            for (let i = 0; i < 9; i++) {
+                let sum = 0;
+                let td = tr[i].querySelectorAll("td");
+                for (let j = 0; j < 9; j++) {
+                    sum += Number(td[j].textContent);
+                }
+                if (sum != 45) {
+                    tr[i].classList.add("trIn");
+                    checkFlag = false;
+                    break;
+                }
+            }
+            // calculate column
+            for (let i = 0; i < 9; i++) {
+                let sum = 0;
+                for (let j = 0; j < 9; j++) {
+                    let td = tr[j].querySelectorAll("td");
+                    sum += Number(td[i].textContent);
+                }
+                if (sum != 45) {
+                    checkFlag = false;
+                    for (let j = 0; j < 9; j++) {
+                    let td = tr[j].querySelectorAll("td");
+                    if (td[j].textContent == td[i].textContent) {
+                        td[i].classList.add("tdIn");
+                        break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            // validator box
+            let sizeSquare = Math.sqrt(size);
+            if(Number.isInteger(sizeSquare)){
+                let arraySquare = [];
+                let squareArray = [];
+                let countCol = 0;  
+                let countLine = 0;
+                for(var line = 0; line < sizeSquare; line++){
+                    countCol = 0; 
+                    for(var col = 0; col < sizeSquare; col++){
+                        for(var i = 0; i < sizeSquare; i++){
+                            for(var x = 0; x < sizeSquare; x++){ 
+                                squareArray.push(values[(i + countLine)][(x + countCol)]);
+                            }
+                        }
+                        countCol = countCol + sizeSquare;
+                        arraySquare.push(squareArray);
+                        squareArray = [];
+                    }
+                    countLine = countLine + sizeSquare;
+                }
+                valArray(arraySquare);
+                if(!arraySquare){
+                    checkFlag = false;
+                };
+            }
+            if (checkFlag) {
+                h3.textContent = "Correct";
+                h3.style.color = "green";
+            } else {
+                h3.textContent = "Incorrect";
+                h3.style.color = "red";
+            }
+        }
+        function valArray(array){
+            for(var i = 0; i < array.length; i++){
+                arryVal = [];
+                for(var x = 0; x < array[i].length; x++){
+                    if(arryVal.includes(array[i][x])){
+                        console.log("Its is not valid");
+                        return false;
+                    }else{
+                        arryVal.push(array[i][x]);
+                    }
+                }
+            }
+            
+        }
+    
+
+</script>
+</html>
